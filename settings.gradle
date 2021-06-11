@@ -1,0 +1,2 @@
+rootProject.name = "rapitel-app"
+include ':app'
