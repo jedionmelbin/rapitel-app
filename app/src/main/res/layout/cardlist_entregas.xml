@@ -22,7 +22,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/icon_cardpedido"
+                app:srcCompat="@drawable/icon_cardpedido_entregado"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -116,9 +116,10 @@
                 android:id="@+id/btnEstadoPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:text="Pendiente"
+                android:text="Entregado"
                 android:textSize="30px"
                 android:textAllCaps="false"
+                android:backgroundTint="@color/colVerde"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
