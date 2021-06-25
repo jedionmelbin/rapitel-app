@@ -37,6 +37,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <Button-->
+<!--        android:id="@+id/btnVerdetalle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:text="Ver detalle pedido"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:backgroundTint="@color/colPlomo"-->
+<!--        android:textSize="30px"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtBuscarPedidoEntregas" />-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaPedidosEntregas"
         android:layout_width="match_parent"

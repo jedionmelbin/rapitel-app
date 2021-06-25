@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".ui.detalle_pedido">
+    tools:context=".ui.detallePedido.detalle_pedido">
 
     <ImageView
         android:id="@+id/iconPedido"
@@ -72,7 +72,7 @@
 
                 <!-- =========  Fila 1 ==========-->
                 <TextView
-                    android:id="@+id/lblCliente"
+                    android:id="@+id/lblFotoDni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cliente:"
@@ -103,7 +103,7 @@
                     android:textColor="@color/colAzul"
                     android:textSize="30px"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/lblCliente" />
+                    app:layout_constraintTop_toTopOf="@+id/lblFotoDni" />
 
                 <TextView
                     android:id="@+id/txtNombresCliente"
@@ -114,7 +114,7 @@
                     android:textColor="@color/colAzul"
                     android:textSize="30px"
                     app:layout_constraintStart_toEndOf="@+id/txtDniCliente"
-                    app:layout_constraintTop_toBottomOf="@+id/lblCliente" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
 
                 <TextView
                     android:id="@+id/txtFechaEntrega"
@@ -230,7 +230,7 @@
 
     <!-- Lista productos pedido-->
     <LinearLayout
-        android:id="@+id/linearLayoutDetProductos"
+        android:id="@+id/linearLayoutEvidencias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -269,7 +269,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutDetProductos">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEvidencias">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

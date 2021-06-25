@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".ui.subirEvidencias.subir_evidencia">
+
+    <ImageView
+        android:id="@+id/iconPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_cardpedido" />
+
+    <TextView
+        android:id="@+id/labelTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Entregar pedido N°: "
+        android:textColor="@color/colPlomo"
+        android:textSize="30px"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iconPedido"
+        app:layout_constraintStart_toEndOf="@+id/iconPedido" />
+
+    <TextView
+        android:id="@+id/txtNumPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="P001000254"
+        android:textColor="@color/colPlomo"
+        android:textSize="30px"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitulo"
+        app:layout_constraintStart_toEndOf="@+id/labelTitulo" />
+
+    <!-- Subir evidencias -->
+    <LinearLayout
+        android:id="@+id/linearLayoutEvidencias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconPedido">
+
+        <TextView
+            android:id="@+id/labelEvidencias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subir evidencias de entrega"
+            android:textColor="@color/colAzul"
+            android:textSize="40px"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="6dp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/imgFotoDni"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon_foto_dni" />
+
+                <TextView
+                    android:id="@+id/lblFotoDni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Subir foto del dni"
+                    android:textColor="@color/colAzul"
+                    android:textSize="30px"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imgFotoDni"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtFotoDni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="pht001000001.jpg"
+                    android:textColor="@color/colPlomo"
+                    android:textSize="30px"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imgFotoDni"
+                    app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
+
+                <ImageButton
+                    android:id="@+id/btnCamaraSubirDni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/icon_camara"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="6dp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/imgFotoEntrega"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon_foto_entrega" />
+
+                <TextView
+                    android:id="@+id/lblFotoEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Subir foto del dni"
+                    android:textColor="@color/colAzul"
+                    android:textSize="30px"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imgFotoEntrega"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtFotoEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="pht001000001.jpg"
+                    android:textColor="@color/colPlomo"
+                    android:textSize="30px"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imgFotoEntrega"
+                    app:layout_constraintTop_toBottomOf="@+id/lblFotoEntrega" />
+
+                <ImageButton
+                    android:id="@+id/btnCamaraSubirEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/icon_camara"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegistrarEntrega"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/colCeleste"
+        android:paddingHorizontal="30dp"
+        android:text="Registrar entrega"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEvidencias" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

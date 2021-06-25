@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".ui.motorizado.motorizado">
+
+    <ImageView
+        android:id="@+id/iconPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_cardpedido" />
+
+    <TextView
+        android:id="@+id/labelTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Entregar pedido N°: "
+        android:textColor="@color/colPlomo"
+        android:textSize="30px"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iconPedido"
+        app:layout_constraintStart_toEndOf="@+id/iconPedido" />
+
+    <TextView
+        android:id="@+id/txtNumPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="P001000254"
+        android:textColor="@color/colPlomo"
+        android:textSize="30px"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitulo"
+        app:layout_constraintStart_toEndOf="@+id/labelTitulo" />
+
+    <Button
+        android:id="@+id/btnEstadoPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:backgroundTint="@color/colCeleste"
+        android:text="Pendiente"
+        android:textAllCaps="false"
+        android:textSize="30px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Lista motorizados -->
+    <LinearLayout
+        android:id="@+id/linearLayoutEvidencias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconPedido">
+
+        <TextView
+            android:id="@+id/labelProductos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cómo vas a entregar el pedido?"
+            android:textColor="@color/colAzul"
+            android:textSize="40px"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaProductosPedido"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelProductos" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colCeleste"
+        android:paddingHorizontal="30dp"
+        android:textAllCaps="false"
+        android:text="Siguiente"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEvidencias" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

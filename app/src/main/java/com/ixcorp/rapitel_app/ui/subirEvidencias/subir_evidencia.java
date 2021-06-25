@@ -1,4 +1,4 @@
-package com.ixcorp.rapitel_app.ui;
+package com.ixcorp.rapitel_app.ui.subirEvidencias;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.ixcorp.rapitel_app.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link detalle_pedido#newInstance} factory method to
+ * Use the {@link subir_evidencia#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class detalle_pedido extends Fragment {
+public class subir_evidencia extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class detalle_pedido extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public detalle_pedido() {
+    public subir_evidencia() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class detalle_pedido extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment detalle_pedido.
+     * @return A new instance of fragment subir_evidencia.
      */
     // TODO: Rename and change types and number of parameters
-    public static detalle_pedido newInstance(String param1, String param2) {
-        detalle_pedido fragment = new detalle_pedido();
+    public static subir_evidencia newInstance(String param1, String param2) {
+        subir_evidencia fragment = new subir_evidencia();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class detalle_pedido extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_pedido, container, false);
+        return inflater.inflate(R.layout.fragment_subir_evidencia, container, false);
     }
 }
