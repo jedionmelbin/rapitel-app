@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rapitelapp">
 
-
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.Rapitelapp.NoActionBar">

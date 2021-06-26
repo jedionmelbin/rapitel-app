@@ -1,28 +1,37 @@
 package com.ixcorp.rapitel_app.ui.perfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ixcorp.rapitel_app.LoginActivity;
+import com.ixcorp.rapitel_app.MainActivity;
+import com.ixcorp.rapitel_app.R;
+import com.ixcorp.rapitel_app.databinding.FragmentDetallePedidoBinding;
 import com.ixcorp.rapitel_app.databinding.FragmentPerfilBinding;
+import com.ixcorp.rapitel_app.ui.detallePedido.detalle_pedido;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel perfilViewModel;
     private FragmentPerfilBinding binding;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        perfilViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        perfilViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -34,6 +43,28 @@ public class NotificationsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+//        final Button btnVerdetalle = binding.btnVerdetalle;
+//        btnVerdetalle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                // Crear fragmento de tu clase
+//                Fragment fragment = new detalle_pedido();
+//                // Obtener el administrador de fragmentos a través de la actividad
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                // Definir una transacción
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                // Remplazar el contenido principal por el fragmento
+//                fragmentTransaction.replace(R.layout.fragment_detalle_pedido,fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                // Cambiar
+//                fragmentTransaction.commit();
+//
+//            }
+//        });
+
+
         return root;
     }
 
