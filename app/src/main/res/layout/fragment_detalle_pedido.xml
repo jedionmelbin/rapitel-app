@@ -72,7 +72,7 @@
 
                 <!-- =========  Fila 1 ==========-->
                 <TextView
-                    android:id="@+id/lblFotoDni"
+                    android:id="@+id/lblNumPedido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cliente:"
@@ -83,7 +83,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/lblFechaEntrega"
+                    android:id="@+id/lblFechaPedido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha Entrega:"
@@ -103,7 +103,7 @@
                     android:textColor="@color/colAzul"
                     android:textSize="30px"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/lblFotoDni" />
+                    app:layout_constraintTop_toTopOf="@+id/lblNumPedido" />
 
                 <TextView
                     android:id="@+id/txtNombresCliente"
@@ -114,7 +114,7 @@
                     android:textColor="@color/colAzul"
                     android:textSize="30px"
                     app:layout_constraintStart_toEndOf="@+id/txtDniCliente"
-                    app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
                 <TextView
                     android:id="@+id/txtFechaEntrega"
@@ -125,7 +125,7 @@
                     android:textColor="@color/colAzul"
                     android:textSize="30px"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lblFechaEntrega" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblFechaPedido" />
 
                 <!-- =========  Fila 2 ==========-->
                 <TextView

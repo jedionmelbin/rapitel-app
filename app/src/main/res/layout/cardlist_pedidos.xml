@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/lblFotoDni"
+                android:id="@+id/lblNumPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lblFechaEntrega"
+                android:id="@+id/lblFechaPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="04/06/2021"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/lblDniCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -58,10 +58,10 @@
                 android:textColor="@color/colAzul"
                 android:textSize="30px"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
+                app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/lblCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -70,11 +70,11 @@
                 android:textColor="@color/colAzul"
                 android:textSize="30px"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
+                app:layout_constraintStart_toEndOf="@+id/lblDniCliente"
+                app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/lblSubtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -84,10 +84,10 @@
                 android:textStyle="bold"
                 android:textColor="@color/colPlomo"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toBottomOf="@+id/lblDniCliente" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/lblIgv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -96,12 +96,12 @@
                 android:textColor="@color/colPlomo"
                 android:textSize="30px"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/textView10"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintEnd_toStartOf="@+id/lblTotal"
+                app:layout_constraintStart_toEndOf="@+id/lblSubtotal"
+                app:layout_constraintTop_toBottomOf="@+id/lblCliente" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/lblTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -110,7 +110,7 @@
                 android:textSize="30px"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+                app:layout_constraintTop_toBottomOf="@+id/lblCliente"/>
 
             <Button
                 android:id="@+id/btnEstadoPedido"
@@ -120,7 +120,7 @@
                 android:textSize="30px"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/lblTotal" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

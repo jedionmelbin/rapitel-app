@@ -27,7 +27,7 @@
                 app:srcCompat="@drawable/icon_moto" />
 
             <TextView
-                android:id="@+id/lblFotoDni"
+                android:id="@+id/lblNumPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -46,7 +46,7 @@
                 android:textColor="@color/colPlomo"
                 android:textSize="30px"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/lblFotoDni"
+                app:layout_constraintStart_toEndOf="@+id/lblNumPedido"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
@@ -60,7 +60,7 @@
                 android:textSize="30px"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imgMotorizado"
-                app:layout_constraintTop_toBottomOf="@+id/lblFotoDni" />
+                app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
             <TextView
                 android:id="@+id/txtplaca"
