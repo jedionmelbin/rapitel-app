@@ -2,11 +2,9 @@ package com.ixcorp.rapitel_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 
@@ -25,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void asignarReferencias(){
 
-        btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
+        btnIniciarSesion = findViewById(R.id.btnEntregarPedido);
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override

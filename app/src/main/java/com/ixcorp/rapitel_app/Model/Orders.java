@@ -19,6 +19,9 @@ public class Orders {
     private String numerDocument;
     private String firstName;
     private String lastName;
+    private String telefono;
+    private String email;
+    private String direccion;
 
     public Integer getOrderId() {
         return orderId;
@@ -106,5 +109,29 @@ public class Orders {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

@@ -1,27 +1,18 @@
 package com.ixcorp.rapitel_app.ui.perfil;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.ixcorp.rapitel_app.LoginActivity;
-import com.ixcorp.rapitel_app.MainActivity;
-import com.ixcorp.rapitel_app.R;
-import com.ixcorp.rapitel_app.databinding.FragmentDetallePedidoBinding;
 import com.ixcorp.rapitel_app.databinding.FragmentPerfilBinding;
-import com.ixcorp.rapitel_app.ui.detallePedido.detalle_pedido;
 
 public class NotificationsFragment extends Fragment {
 

@@ -33,7 +33,7 @@
                 android:layout_marginStart="8dp"
                 android:text="P001000255"
                 android:textColor="@color/colPlomo"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="04/06/2021"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 android:textColor="@color/colPlomo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
                 android:text="74539106"
                 android:textStyle="bold"
                 android:textColor="@color/colAzul"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
@@ -68,7 +68,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Efrain Mercado Chavez"
                 android:textColor="@color/colAzul"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/lblDniCliente"
                 app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
@@ -80,7 +80,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:text="Sub: S/ 404.84"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 android:textStyle="bold"
                 android:textColor="@color/colPlomo"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -94,7 +94,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Igv: S/ 72.87"
                 android:textColor="@color/colPlomo"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/lblTotal"
                 app:layout_constraintStart_toEndOf="@+id/lblSubtotal"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Tot: S/ 72.87"
                 android:textColor="@color/colPlomo"
-                android:textSize="30px"
+                android:textSize="@dimen/_sizeText"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblCliente"/>

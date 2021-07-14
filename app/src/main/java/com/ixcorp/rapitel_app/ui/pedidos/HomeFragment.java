@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +26,9 @@ import com.android.volley.toolbox.Volley;
 import com.ixcorp.rapitel_app.Adapters.Pedido.PedidoAdapter;
 import com.ixcorp.rapitel_app.Model.Orders;
 import com.ixcorp.rapitel_app.R;
+import com.ixcorp.rapitel_app.Utils.Api;
 import com.ixcorp.rapitel_app.databinding.FragmentPedidosBinding;
+import com.ixcorp.rapitel_app.ui.detallePedido.DetallePedidoFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +42,8 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentPedidosBinding binding;
-
-    private static final String URL1="https://rapitel-api.azurewebsites.net/orders/list";
+    String URL = Api.URL_API;
+    String URL1 = URL+"orders/list/A";
 
     List<Orders> listaPedidos = new ArrayList<>();
     RecyclerView recyclerView;
@@ -47,16 +51,15 @@ public class HomeFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_pedidos,container,false);
-//        recyclerView = view.findViewById(R.id.listaPedidosEntregas);
-//        listPedido = new ArrayList<>();
-//        view = binding.getRoot();
+//        View root = inflater.inflate(R.layout.fragment_pedidos,container,false);
+//        recyclerView = root.findViewById(R.id.listaPedidosEntregas);
+//        root = binding.getRoot();
 
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentPedidosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        return root;
+       return root;
     }
 
     @Override
@@ -68,7 +71,9 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.listaPedidosEntregas);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        
+
+
+
         parseJSON();
     }
 
@@ -88,14 +93,20 @@ public class HomeFragment extends Fragment {
                                 JSONObject ped = array.getJSONObject(i);
                                 JSONObject cust = ped.getJSONObject("customers");
 
+                                pedido.setOrderId(ped.getInt("orderId"));
                                 pedido.setMumOrder(ped.getString("mumOrder"));
-                                pedido.setNumerDocument(cust.getString("numerDocument"));
-                                pedido.setFirstName(cust.getString("firstName"));
-                                pedido.setLastName (cust.getString("lastName"));
                                 pedido.setCreateDate(ped.getString("createDate"));
+                                pedido.setDeliveyTime(ped.getString("deliveyTime"));
                                 pedido.setSubTotal(ped.getDouble("subTotal"));
                                 pedido.setIgv(ped.getDouble("igv"));
                                 pedido.setTotal(ped.getDouble("total"));
+
+                                pedido.setNumerDocument(cust.getString("numerDocument"));
+                                pedido.setFirstName(cust.getString("firstName"));
+                                pedido.setLastName (cust.getString("lastName"));
+                                pedido.setTelefono(cust.getString("phone"));
+                                pedido.setEmail(cust.getString("email"));
+                                pedido.setDireccion(cust.getString("address"));
 
                                 listaPedidos.add(pedido);
                             }
@@ -121,5 +132,11 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void ejecutarMetItem(){
+        Log.d("******", "se ejecuto");
+
+
     }
 }

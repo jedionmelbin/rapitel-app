@@ -2,7 +2,7 @@ package com.ixcorp.rapitel_app.Model;
 
 public class Customer {
 
-    private Integer customerId;
+    private String customerId;
     private String numerDocument;
     private String firstName;
     private String lastName;
@@ -10,11 +10,11 @@ public class Customer {
     private String phone;
     private String address;
 
-    public Integer getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
