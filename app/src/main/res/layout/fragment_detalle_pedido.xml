@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/iconPedido" />
 
     <TextView
-        android:id="@+id/txtNumPedido"
+        android:id="@+id/txtNumPedidoMot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -253,13 +253,13 @@
             app:layout_constraintStart_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaProductosPedido"
+            android:id="@+id/listaMotorizados"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProductos"/>
+            app:layout_constraintTop_toBottomOf="@+id/labelProductos" />
     </LinearLayout>
 
     <!-- Detalle subtotal pedido-->

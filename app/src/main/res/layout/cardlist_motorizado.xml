@@ -21,7 +21,8 @@
                 android:id="@+id/imgMotorizado"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_moto" />
@@ -38,7 +39,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imgMotorizado"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/txtFotoDni"
+                android:id="@+id/txtVehiculo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -99,14 +100,15 @@
                 app:layout_constraintStart_toEndOf="@+id/lblColor"
                 app:layout_constraintTop_toTopOf="@+id/lblColor" />
 
-            <RadioButton
-                android:id="@+id/radMotorizado"
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_next" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

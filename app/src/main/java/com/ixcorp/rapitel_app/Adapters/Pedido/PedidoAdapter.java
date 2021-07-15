@@ -29,7 +29,6 @@ import java.util.List;
 public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHolder> {
     private Context context;
     private List<Orders> listaPedidos;
-    final MainActivity activity = (MainActivity) context;
 
 
     public PedidoAdapter(Context context,List<Orders> listaPedidos) {
@@ -51,7 +50,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHold
         holder.txtNumPedido.setText(listaPedidos.get(position).getMumOrder()+"");
         holder.txtDniCliente.setText(listaPedidos.get(position).getNumerDocument()+"");
         holder.txtCliente.setText(listaPedidos.get(position).getFirstName()+" "+listaPedidos.get(position).getLastName()+"");
-        holder.txtFechaPedido.setText(listaPedidos.get(position).getCreateDate()+"");
+        holder.txtFechaPedido.setText(listaPedidos.get(position).getCreateDate().substring(0,10));
         holder.txtSubtotal.setText("S/ "+ listaPedidos.get(position).getSubTotal()+"");
         holder.txtIgv.setText("S/ "+ listaPedidos.get(position).getIgv()+"");
         holder.txtTotal.setText("S/ "+ listaPedidos.get(position).getTotal()+"");
@@ -62,12 +61,6 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHold
                // Toast.makeText(context,listaPedidos.get(position).getMumOrder(),Toast.LENGTH_SHORT).show();
 
                 MainActivity activity = (MainActivity) view.getContext();
-//                Fragment myFragment = new DetallePedidoFragment();
-//                activity.getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.nav_host_fragment_activity_main,myFragment)
-//                        .commit();
-
                 Fragment newFragment = new DetallePedidoFragment();
                 Bundle envData = new Bundle();
                 envData.putString("idPedido", listaPedidos.get(position).getOrderId()+"");

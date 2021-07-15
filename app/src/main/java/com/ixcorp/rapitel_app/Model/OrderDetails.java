@@ -5,8 +5,11 @@ public class OrderDetails {
     private Integer orderDetailsId;
     private Double price;
     private String count;
+
     private Integer productId;
-    private Orders orders;
+    private String code;
+    private String description;
+    private String unidadMedida;
 
     public Integer getOrderDetailsId() {
         return orderDetailsId;
@@ -40,11 +43,27 @@ public class OrderDetails {
         this.productId = productId;
     }
 
-    public Orders getOrders() {
-        return orders;
+    public String getCode() {
+        return code;
     }
 
-    public void setOrders(Orders orders) {
-        this.orders = orders;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 }

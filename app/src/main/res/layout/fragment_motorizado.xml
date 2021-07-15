@@ -4,8 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    tools:context=".ui.motorizado.motorizado">
+    android:background="@color/white"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="5dp"
+    tools:context=".ui.motorizado.MotorizadoFragment">
 
     <ImageView
         android:id="@+id/iconPedido"
@@ -22,13 +24,13 @@
         android:layout_marginStart="10dp"
         android:text="Entregar pedido N°: "
         android:textColor="@color/colPlomo"
-        android:textSize="30px"
+        android:textSize="@dimen/_sizeText"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iconPedido"
         app:layout_constraintStart_toEndOf="@+id/iconPedido" />
 
     <TextView
-        android:id="@+id/txtNumPedido"
+        android:id="@+id/txtNumPedidoMot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -72,27 +74,14 @@
             app:layout_constraintStart_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaProductosPedido"
+            android:id="@+id/listaMotorizados"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProductos" />
+            app:layout_constraintTop_toBottomOf="@+id/labelProductos"
+            tools:listitem="@layout/cardlist_motorizado"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnEntregarPedido"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/colCeleste"
-        android:paddingHorizontal="30dp"
-        android:textAllCaps="false"
-        android:text="Siguiente"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEvidencias" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

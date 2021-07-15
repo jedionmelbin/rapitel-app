@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.ixcorp.rapitel_app.Adapters.DetallePedido.DetallePedidoAdapter;
+import com.ixcorp.rapitel_app.MainActivity;
 import com.ixcorp.rapitel_app.Model.OrderDetails;
 import com.ixcorp.rapitel_app.R;
-import com.ixcorp.rapitel_app.databinding.FragmentPedidosBinding;
-import com.ixcorp.rapitel_app.ui.pedidos.HomeViewModel;
+import com.ixcorp.rapitel_app.Utils.Api;
+import com.ixcorp.rapitel_app.ui.motorizado.MotorizadoFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,30 +39,37 @@ import java.util.List;
 public class DetallePedidoFragment extends Fragment {
 
     TextView txtnumPedido,txtdniCliente,txtnombreCliente,txttelefono,txtemail,txtdireccion,txtfechaEntrega,txthoraEntrega,txtsubtotal,txtigv,txttotal;
+    String idPedido,numPed;
     Button btnEntregarPedido;
     List<OrderDetails> listOrderDetails = new ArrayList<>();
+    RecyclerView recyclerView;
+    RequestQueue requestQueue;
+
+    String URL = Api.URL_API;
+    String URL1 = URL+"datails/list/";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_detalle_pedido, container, false);
-
-
     }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        recyclerView = view.findViewById(R.id.listaMotorizados);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         asignarReferencias(view);
 
         Bundle datosRecuperados = getArguments();
         if (datosRecuperados == null) {
             // No hay datos, manejar excepción
+            Toast.makeText(getContext(),"No hay datos para mostrar",Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //String nombre = datosRecuperados.getString("idPedido");
-        //Log.d("====>>>>", "El nombre: " + nombre);
         String idOrder = datosRecuperados.getString("idPedido");
         String numPedido = datosRecuperados.getString("numPedido");
         String dni = datosRecuperados.getString("dni");
@@ -68,28 +90,72 @@ public class DetallePedidoFragment extends Fragment {
         txttelefono.setText(telefono);
         txtdireccion.setText(direccion);
         txtemail.setText(email);
-        txtfechaEntrega.setText(fechaPedido);
-        txthoraEntrega.setText(horaEntrega);
+        txtfechaEntrega.setText(fechaPedido.substring(0,10));
+        txthoraEntrega.setText(horaEntrega.substring(11));
         txtsubtotal.setText("S/ " + subtotal);
         txtigv.setText("S/ " + igv);
         txttotal.setText("S/ " + total);
 
-        Log.d("====>>>>", "El idOrder: " + idOrder);
-        Log.d("====>>>>", "El numPedido: " + numPedido);
-        Log.d("====>>>>", "El dni: " + dni);
-        Log.d("====>>>>", "El cliente: " + cliente);
-        Log.d("====>>>>", "El telefono: " + telefono);
-        Log.d("====>>>>", "El direccion: " + direccion);
-        Log.d("====>>>>", "El email: " + email);
-        Log.d("====>>>>", "El fechaPedido: " + fechaPedido);
-        Log.d("====>>>>", "El horaEntrega: " + horaEntrega);
-        Log.d("====>>>>", "El subtotal: " + subtotal);
-        Log.d("====>>>>", "El igv: " + igv);
-        Log.d("====>>>>", "El total: " + total);
+        //Para enviar al fragment motorizado
+        idPedido = idOrder;
+        numPed = numPedido;
+
+
+
+        //Log.d("IDORDER=>>>",idPedido);
+
+        parseJSON(idOrder);
     }
 
+    private void parseJSON(String idOrder) {
+        String miUrl = URL1 + idOrder;
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                miUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+
+                            for (int i=0; i<array.length(); i++){
+                                OrderDetails orderDetails = new OrderDetails();
+                                JSONObject ped = array.getJSONObject(i);
+                                JSONObject prod = ped.getJSONObject("products");
+
+                                orderDetails.setPrice(ped.getDouble("price"));
+                                orderDetails.setCount(ped.getString("count"));
+
+                                orderDetails.setCode(prod.getString("code"));
+                                orderDetails.setDescription(prod.getString("description"));
+                                orderDetails.setUnidadMedida(prod.getString("unidadMedida"));
+
+                                listOrderDetails.add(orderDetails);
+                            }
+
+                           // Log.d("******", String.valueOf(listOrderDetails));
+
+                            recyclerView.setAdapter(new DetallePedidoAdapter(getContext(),listOrderDetails));
+                        }catch (JSONException e) {
+                            Log.i("Error => ", e.getMessage());
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        Log.i("Error => ", e.getMessage());
+                    }
+                }
+        );
+        requestQueue.add(request);
+    }
+
+
     private void asignarReferencias(View view) {
-        txtnumPedido = view.findViewById(R.id.txtNumPedido);
+        txtnumPedido = view.findViewById(R.id.txtNumPedidoMot);
         txtdniCliente = view.findViewById(R.id.txtDniCliente);
         txtnombreCliente = view.findViewById(R.id.txtNombresCliente);
         txttelefono = view.findViewById(R.id.txtTelefono);
@@ -101,5 +167,25 @@ public class DetallePedidoFragment extends Fragment {
         txtsubtotal = view.findViewById(R.id.txtSubtotal);
         txtigv = view.findViewById(R.id.txtIgv);
         txttotal = view.findViewById(R.id.txtTotal);
+
+        btnEntregarPedido = view.findViewById(R.id.btnEntregarPedido);
+        btnEntregarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getContext(),"Boton clickkkk",Toast.LENGTH_SHORT).show();
+
+                MainActivity activity = (MainActivity) view.getContext();
+                Fragment newFragment = new MotorizadoFragment();
+                Bundle envData = new Bundle();
+                envData.putString("idPedido", idPedido);
+                envData.putString("numPedido", numPed);
+                newFragment.setArguments(envData);
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main,newFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 }
