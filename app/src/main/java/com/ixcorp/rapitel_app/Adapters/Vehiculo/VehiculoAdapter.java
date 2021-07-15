@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ixcorp.rapitel_app.MainActivity;
 import com.ixcorp.rapitel_app.Model.Vehicle;
 import com.ixcorp.rapitel_app.R;
-import com.ixcorp.rapitel_app.ui.detallePedido.DetallePedidoFragment;
 import com.ixcorp.rapitel_app.ui.rutaMapa.RutaMapaFragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -53,6 +52,11 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.MyView
                 Bundle envData = new Bundle();
                 envData.putString("idVehiculo", listaVehiculos.get(position).getVehicleId()+"");
 
+                envData.putString("idPedido", listaVehiculos.get(position).getNumPedido()+"");
+                envData.putString("dCliente", listaVehiculos.get(position).getsCliente()+"");
+                envData.putString("dDireccion", listaVehiculos.get(position).getsDireccion()+"");
+                envData.putString("dTelefono", listaVehiculos.get(position).getsTelefono()+"");
+
                 newFragment.setArguments(envData);
                 activity.getSupportFragmentManager()
                         .beginTransaction()
@@ -73,9 +77,9 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.MyView
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtVehiulo = itemView.findViewById(R.id.txtVehiculo);
-            txtPlaca = itemView.findViewById(R.id.txtplaca);
-            txtColor = itemView.findViewById(R.id.txtColor);
+            txtVehiulo = itemView.findViewById(R.id.txtMapDireccionCliente);
+            txtPlaca = itemView.findViewById(R.id.txtMapCliente);
+            txtColor = itemView.findViewById(R.id.txtMapTelefonoCliente);
         }
     }
 }

@@ -6,6 +6,11 @@ public class Vehicle {
     private String plate;
     private String color;
 
+    private String numPedido;
+    private String sCliente;
+    private String sDireccion;
+    private String sTelefono;
+
     public Integer getVehicleId() {
         return vehicleId;
     }
@@ -36,5 +41,37 @@ public class Vehicle {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getNumPedido() {
+        return numPedido;
+    }
+
+    public void setNumPedido(String numPedido) {
+        this.numPedido = numPedido;
+    }
+
+    public String getsCliente() {
+        return sCliente;
+    }
+
+    public void setsCliente(String sCliente) {
+        this.sCliente = sCliente;
+    }
+
+    public String getsDireccion() {
+        return sDireccion;
+    }
+
+    public void setsDireccion(String sDireccion) {
+        this.sDireccion = sDireccion;
+    }
+
+    public String getsTelefono() {
+        return sTelefono;
+    }
+
+    public void setsTelefono(String sTelefono) {
+        this.sTelefono = sTelefono;
     }
 }

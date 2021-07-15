@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imgMotorizado"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/txtVehiculo"
+                android:id="@+id/txtMapDireccionCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblNumPedido" />
 
             <TextView
-                android:id="@+id/txtplaca"
+                android:id="@+id/txtMapCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -89,7 +89,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblPlaca" />
 
             <TextView
-                android:id="@+id/txtColor"
+                android:id="@+id/txtMapTelefonoCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

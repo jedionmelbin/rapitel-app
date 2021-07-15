@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -118,7 +119,8 @@ public class HomeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError e) {
-                        Log.i("Error => ", e.getMessage());
+                        //Log.i("Error => ", e.getMessage());
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -132,9 +134,4 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void ejecutarMetItem(){
-        Log.d("******", "se ejecuto");
-
-
-    }
 }

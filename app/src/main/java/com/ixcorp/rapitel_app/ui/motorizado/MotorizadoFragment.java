@@ -38,8 +38,8 @@ import java.util.List;
 public class MotorizadoFragment extends Fragment {
 
     //TextView txtVehiulo,txtPlaca,txtColor;
-    TextView txtnumPedido,txtNumPedidoMot;
-    String idPedido;
+    TextView txtNumPedidoMot;
+    String idPedido,dCliente,dDireccion,dTelefono;
     List<Vehicle> listaVehiculo = new ArrayList<>();
     RecyclerView recyclerView;
     RequestQueue requestQueue;
@@ -71,18 +71,19 @@ public class MotorizadoFragment extends Fragment {
 
         String idOrder = datosRecuperados.getString("idPedido");
         String numPed = datosRecuperados.getString("numPedido");
+        String datCliente = datosRecuperados.getString("datCliente");
+        String datDireccion = datosRecuperados.getString("datDireccion");
+        String datTelefono = datosRecuperados.getString("datTelefono");
 
         idPedido = idOrder;
+        dCliente = datCliente;
+        dDireccion = datDireccion;
+        dTelefono = datTelefono;
+
         txtNumPedidoMot.setText(numPed);
         parseJSON();
 
     }
-
-//    private void asignarReferencias(View view) {
-//        txtVehiulo = view.findViewById(R.id.txtVehiculo);
-//        txtPlaca = view.findViewById(R.id.txtplaca);
-//        txtColor = view.findViewById(R.id.txtColor);
-//    }
 
     private void parseJSON() {
         StringRequest request = new StringRequest(
@@ -101,6 +102,10 @@ public class MotorizadoFragment extends Fragment {
                                 vehicle.setNameVehiculo(veh.getString("name"));
                                 vehicle.setPlate(veh.getString("plate"));
                                 vehicle.setColor(veh.getString("color"));
+                                vehicle.setNumPedido(idPedido);
+                                vehicle.setsCliente(dCliente);
+                                vehicle.setsDireccion(dDireccion);
+                                vehicle.setsTelefono(dTelefono);
 
                                 listaVehiculo.add(vehicle);
                             }

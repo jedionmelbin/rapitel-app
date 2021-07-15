@@ -39,7 +39,7 @@ import java.util.List;
 public class DetallePedidoFragment extends Fragment {
 
     TextView txtnumPedido,txtdniCliente,txtnombreCliente,txttelefono,txtemail,txtdireccion,txtfechaEntrega,txthoraEntrega,txtsubtotal,txtigv,txttotal;
-    String idPedido,numPed;
+    String idPedido,numPed,datCliente,datDireccion,datTelefono;
     Button btnEntregarPedido;
     List<OrderDetails> listOrderDetails = new ArrayList<>();
     RecyclerView recyclerView;
@@ -99,8 +99,9 @@ public class DetallePedidoFragment extends Fragment {
         //Para enviar al fragment motorizado
         idPedido = idOrder;
         numPed = numPedido;
-
-
+        datCliente = dni +" - " + cliente;
+        datDireccion = direccion;
+        datTelefono =  telefono;
 
         //Log.d("IDORDER=>>>",idPedido);
 
@@ -179,6 +180,9 @@ public class DetallePedidoFragment extends Fragment {
                 Bundle envData = new Bundle();
                 envData.putString("idPedido", idPedido);
                 envData.putString("numPedido", numPed);
+                envData.putString("datCliente",datCliente);
+                envData.putString("datDireccion",datDireccion);
+                envData.putString("datTelefono",datTelefono);
                 newFragment.setArguments(envData);
                 activity.getSupportFragmentManager()
                         .beginTransaction()
