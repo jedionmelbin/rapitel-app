@@ -104,7 +104,7 @@ public class DetallePedidoFragment extends Fragment {
 //        txtfechaEntrega.setText(fechaPedido.substring(0,10));
 //        txthoraEntrega.setText(horaEntrega.substring(11));
         txtfechaEntrega.setText(fechaPedido);
-        txthoraEntrega.setText("3:30 pm");
+        txthoraEntrega.setText(horaEntrega);
         txtsubtotal.setText("S/ " + subtotal);
         txtigv.setText("S/ " + igv);
         txttotal.setText("S/ " + total);

@@ -33,9 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.ixcorp.rapitel_app.LoginActivity;
 import com.ixcorp.rapitel_app.MainActivity;
 import com.ixcorp.rapitel_app.Model.DataPart;
 import com.ixcorp.rapitel_app.R;
@@ -56,16 +59,20 @@ import java.util.Map;
 public class SubirEvidenciasFragment extends Fragment {
 
     String idPedido, numPedido, idVehiculo;
-    TextView txtNumpedido, txtFotoDni, txtFotoEntrega,txtNombDniEvidencias;
+    TextView txtNumpedido, txtFotoDni, txtFotoEntrega,txtNombDniEvidencias,txtNombEvidenciasEntrega;
     Button btnRegistrarEntregaPedido;
     ImageView imgFotoDni, imgFotoEntrega;
 
     ImageButton btnCamaraDni, btnCamaraEntrega;
     private static final int REQUEST_PERMISSION_CAMERA = 100;
     private static final int REQUEST_IMAGE_CAMERA = 101;
+    public String IMAGEN1;
 
     String URL = Api.URL_API;
     String URL1 = URL + "evidences/uploadFile";
+    String URL2 = URL + "evidences/create";
+
+
 
 
     @Override
@@ -96,6 +103,7 @@ public class SubirEvidenciasFragment extends Fragment {
         imgFotoDni = view.findViewById(R.id.imgFotoDni);
         imgFotoEntrega = view.findViewById(R.id.imgFotoEntrega);
         txtNombDniEvidencias = view.findViewById(R.id.txtNombDniEvidencias);
+        txtNombEvidenciasEntrega = view.findViewById(R.id.txtNombEntregaEvidencias);
 
 
         txtNumpedido.setText(numPedido);
@@ -110,11 +118,30 @@ public class SubirEvidenciasFragment extends Fragment {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         abrirCamara();
+                        IMAGEN1 = "FOTODNI";
                     } else {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CAMERA);
                     }
                 } else {
                     abrirCamara();
+                    IMAGEN1 = "FOTODNI";
+                }
+            }
+        });
+
+        btnCamaraEntrega.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                        abrirCamara();
+                        IMAGEN1 = "FOTOENTREGA";
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CAMERA);
+                    }
+                } else {
+                    abrirCamara();
+                    IMAGEN1 = "FOTOENTREGA";
                 }
             }
         });
@@ -166,14 +193,14 @@ public class SubirEvidenciasFragment extends Fragment {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 Log.i("TAGIMG", "Result=> " + bitmap);
 
-               // Uri picUri = data.getData();
-               // String filePath = getPath(picUri);
-
-                //Log.d("filePath", String.valueOf(filePath));
-
-
                 uploadBitmap(bitmap);
-                imgFotoDni.setImageBitmap(bitmap);
+
+                if (IMAGEN1.equals("FOTODNI")){
+                    imgFotoDni.setImageBitmap(bitmap);
+                }else {
+                    imgFotoEntrega.setImageBitmap(bitmap);
+                }
+
 
             }
         }
@@ -217,12 +244,22 @@ public class SubirEvidenciasFragment extends Fragment {
                     public void onResponse(NetworkResponse response) {
                         try {
                             JSONObject obj = new JSONObject(new String(response.data));
-                            Log.d("RST=========", obj+"");
 
                             String nomImage = obj.getString("fileName");
-                            txtNombDniEvidencias.setText(nomImage);
 
-                            Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            if (IMAGEN1.equals("FOTODNI")){
+                                txtNombDniEvidencias.setText(nomImage);
+                            }else {
+                                txtNombEvidenciasEntrega.setText(nomImage);
+                            }
+
+                            if (nomImage.length()>0){
+                                guardarEvidencia(nomImage);
+                            }else{
+                                Toast.makeText(getContext(), "Vuelva a tomar nueva fotografía", Toast.LENGTH_SHORT).show();
+                            }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -258,5 +295,52 @@ public class SubirEvidenciasFragment extends Fragment {
         return byteArrayOutputStream.toByteArray();
     }
 
+    private void guardarEvidencia(String nombImage){
+        String nombreImage = nombImage;
+        Integer orderId =  Integer.parseInt(idPedido);
+
+        HashMap data = new HashMap();
+
+        data.put("evidenceId",0);
+        data.put("orderId", orderId);
+
+        if (IMAGEN1.equals("FOTODNI")){
+            data.put("dniImage", nombreImage);
+            data.put("picture", null);
+        }else {
+            data.put("dniImage", null);
+            data.put("picture", nombreImage);
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL2, new JSONObject(data), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //String code = response.optString("message");
+                Toast.makeText(getContext(), "Evidencia registrada con éxito 2021", Toast.LENGTH_SHORT).show();
+                //Boolean rsp = response.optBoolean("success");
+
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ID", "onResponse: " + error.toString());
+                        //Toast.makeText(getContext(), "Error al guardar evidencia", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            //here I want to post data to sever
+        };
+
+        btnRegistrarEntregaPedido.setVisibility(View.VISIBLE);
+        Toast.makeText(getContext(), "Evidencia registrada con éxito", Toast.LENGTH_SHORT).show();
+
+        RequestQueue cola = Volley.newRequestQueue(getContext());
+        cola.add(jsonObjectRequest);
+
+        IMAGEN1 = "";
+
+    }
 
 }

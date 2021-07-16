@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
                                 pedido.setOrderId(ped.getInt("orderId"));
                                 pedido.setMumOrder(ped.getString("mumOrder"));
                                 pedido.setCreateDate(ped.getString("createDate"));
-                                pedido.setDeliveyTime(ped.getString("deliveyTime"));
+                                pedido.setDeliveyTime(ped.getString("deliveryDate"));
                                 pedido.setSubTotal(ped.getDouble("subTotal"));
                                 pedido.setIgv(ped.getDouble("igv"));
                                 pedido.setTotal(ped.getDouble("total"));

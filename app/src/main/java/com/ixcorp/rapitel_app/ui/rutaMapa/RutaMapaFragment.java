@@ -87,6 +87,10 @@ public class RutaMapaFragment extends Fragment {
         txtCliente = view.findViewById(R.id.txtMapCliente);
         txtTelefono = view.findViewById(R.id.txtMapTelefonoCliente);
 
+        txtDireccion.setText(dDireccion);
+        txtCliente.setText(dCliente);
+        txtTelefono.setText(dTelefono);
+
         btnMapEntregarPedido = view.findViewById(R.id.btnMapEntregarPedido);
         btnLlamarCliente = view.findViewById(R.id.btnMapLlamarCliente);
 
@@ -177,8 +181,6 @@ public class RutaMapaFragment extends Fragment {
                 if (direccion != null || !direccion.equals("")){
                     Geocoder geocoder = new Geocoder(getContext());
                     listaDirecciones = geocoder.getFromLocationName(direccion,1);
-
-                    Log.d("MEnsaje=XXXXXXXXXX>",direccion);
 
                     Address address = listaDirecciones.get(0);
                     LatLng posicion = new LatLng(address.getLatitude(),address.getLongitude());
