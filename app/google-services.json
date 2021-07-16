@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715001372133",
+    "project_id": "rapitel-app",
+    "storage_bucket": "rapitel-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715001372133:android:cecb08534624b7f74fe30c",
+        "android_client_info": {
+          "package_name": "com.ixcorp.rapitel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715001372133-03kut88l8dr73gg0rtlgmb2qn34b6q4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJz1bXhHB5fd3Quy4QK_TXs47si7nzoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715001372133-03kut88l8dr73gg0rtlgmb2qn34b6q4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

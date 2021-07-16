@@ -41,7 +41,14 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHold
     @Override
     public PedidoAdapter.MyViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View vista = inflater.inflate(R.layout.cardlist_pedidos,parent,false);
+        View vista;
+
+        if (listaPedidos.get(viewType).getTipoConsulta()=="ENTREGADOS"){
+            vista = inflater.inflate(R.layout.cardlist_entregas,parent,false);
+        }else {
+            vista = inflater.inflate(R.layout.cardlist_pedidos,parent,false);
+        }
+
         return new MyViewHolder(vista);
     }
 
@@ -72,6 +79,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHold
                 envData.putString("email",  listaPedidos.get(position).getEmail()+"");
                 envData.putString("fechaPedido", listaPedidos.get(position).getCreateDate()+"");
                 envData.putString("horaEntrega", listaPedidos.get(position).getDeliveyTime()+"");
+                envData.putString("tipoCosulta", listaPedidos.get(position).getTipoConsulta()+"");
 
                 envData.putDouble("subtotal",listaPedidos.get(position).getSubTotal());
                 envData.putDouble("igv",listaPedidos.get(position).getIgv());

@@ -2,20 +2,25 @@ package com.ixcorp.rapitel_app.ui.subirEvidencias;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
+import com.android.volley.NetworkResponse;
+
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,23 +32,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.ixcorp.rapitel_app.MainActivity;
+import com.ixcorp.rapitel_app.Model.DataPart;
 import com.ixcorp.rapitel_app.R;
+import com.ixcorp.rapitel_app.Utils.Api;
+import com.ixcorp.rapitel_app.config.VolleyMultipartRequest;
+import com.ixcorp.rapitel_app.ui.motorizado.MotorizadoFragment;
+import com.ixcorp.rapitel_app.ui.pedidos.HomeFragment;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SubirEvidenciasFragment extends Fragment {
 
-    String idPedido,numPedido,idVehiculo;
-    TextView txtNumpedido,txtFotoDni,txtFotoEntrega;
+    String idPedido, numPedido, idVehiculo;
+    TextView txtNumpedido, txtFotoDni, txtFotoEntrega,txtNombDniEvidencias;
     Button btnRegistrarEntregaPedido;
-    ImageView imgFotoDni,imgFotoEntrega;
+    ImageView imgFotoDni, imgFotoEntrega;
 
-    ImageButton btnCamaraDni,btnCamaraEntrega;
+    ImageButton btnCamaraDni, btnCamaraEntrega;
     private static final int REQUEST_PERMISSION_CAMERA = 100;
     private static final int REQUEST_IMAGE_CAMERA = 101;
+
+    String URL = Api.URL_API;
+    String URL1 = URL + "evidences/uploadFile";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +79,7 @@ public class SubirEvidenciasFragment extends Fragment {
 
         Bundle datosRecuperados = getArguments();
         if (datosRecuperados == null) {
-            Toast.makeText(getContext(),"No hay datos para mostrar",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No hay datos para mostrar", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -72,6 +95,7 @@ public class SubirEvidenciasFragment extends Fragment {
         txtFotoEntrega = view.findViewById(R.id.txtNombEntregaEvidencias);
         imgFotoDni = view.findViewById(R.id.imgFotoDni);
         imgFotoEntrega = view.findViewById(R.id.imgFotoEntrega);
+        txtNombDniEvidencias = view.findViewById(R.id.txtNombDniEvidencias);
 
 
         txtNumpedido.setText(numPedido);
@@ -83,13 +107,13 @@ public class SubirEvidenciasFragment extends Fragment {
         btnCamaraDni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(ActivityCompat.checkSelfPermission(getContext(),Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         abrirCamara();
-                    }else {
-                        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA},REQUEST_PERMISSION_CAMERA);
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CAMERA);
                     }
-                }else{
+                } else {
                     abrirCamara();
                 }
             }
@@ -98,17 +122,37 @@ public class SubirEvidenciasFragment extends Fragment {
         btnRegistrarEntregaPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Registrar entrega pedido", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Registrar entrega pedido", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder ventana = new AlertDialog.Builder(getContext());
+                ventana.setTitle("Exito");
+                ventana.setMessage("El pedido se regsitro correctamente");
+                ventana.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity activity = (MainActivity) view.getContext();
+                        Fragment newFragment = new HomeFragment();
+                        activity.getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.nav_host_fragment_activity_main,newFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
+
+                ventana.create().show();
+
             }
         });
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION_CAMERA){
-            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_PERMISSION_CAMERA) {
+            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 abrirCamara();
-            }else{
+            } else {
                 Toast.makeText(getContext(), "Se requiere dar permisos a la camara", Toast.LENGTH_SHORT).show();
             }
         }
@@ -116,12 +160,19 @@ public class SubirEvidenciasFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAMERA){
-            if (resultCode == Activity.RESULT_OK){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAMERA) {
+            if (resultCode == Activity.RESULT_OK) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                Log.i("TAGIMG","Result=> " + bitmap);
-                //seteamos la imagen
+                Log.i("TAGIMG", "Result=> " + bitmap);
+
+               // Uri picUri = data.getData();
+               // String filePath = getPath(picUri);
+
+                //Log.d("filePath", String.valueOf(filePath));
+
+
+                uploadBitmap(bitmap);
                 imgFotoDni.setImageBitmap(bitmap);
 
             }
@@ -129,15 +180,82 @@ public class SubirEvidenciasFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void abrirCamara(){
+    public String getPath(Uri uri) {
+        Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = getActivity().getApplicationContext().getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
+
+    private void abrirCamara() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if (cameraIntent.resolveActivity(getContext().getPackageManager())!= null){
+        if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
             getActivity().startActivityFromFragment(SubirEvidenciasFragment.this, cameraIntent, REQUEST_IMAGE_CAMERA);
 
-        }else{
+        } else {
             Toast.makeText(getContext(), "No se puede abrir la camara", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void uploadBitmap(final Bitmap bitmap) {
+
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL1,
+                new Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            JSONObject obj = new JSONObject(new String(response.data));
+                            Log.d("RST=========", obj+"");
+
+                            String nomImage = obj.getString("fileName");
+                            txtNombDniEvidencias.setText(nomImage);
+
+                            Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("GotError", "" + error.getMessage());
+
+                    }
+                }) {
+
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+                params.put("file", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                return params;
+            }
+        };
+
+        //adding the request to volley
+        Volley.newRequestQueue(getContext()).add(volleyMultipartRequest);
+    }
+
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
 

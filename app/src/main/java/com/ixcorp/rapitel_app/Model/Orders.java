@@ -15,6 +15,7 @@ public class Orders {
     private Double subTotal;
     private Double igv;
     private Double total;
+    private String tipoConsulta;
 
     private String numerDocument;
     private String firstName;
@@ -85,6 +86,14 @@ public class Orders {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(String tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
     }
 
     public String getNumerDocument() {

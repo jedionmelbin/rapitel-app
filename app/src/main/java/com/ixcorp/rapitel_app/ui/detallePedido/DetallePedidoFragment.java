@@ -39,8 +39,8 @@ import java.util.List;
 public class DetallePedidoFragment extends Fragment {
 
     TextView txtnumPedido,txtdniCliente,txtnombreCliente,txttelefono,txtemail,txtdireccion,txtfechaEntrega,txthoraEntrega,txtsubtotal,txtigv,txttotal;
-    String idPedido,numPed,datCliente,datDireccion,datTelefono;
-    Button btnEntregarPedido;
+    String idPedido,numPed,datCliente,datDireccion,datTelefono,datTipoCosnulta;
+    Button btnEntregarPedido,btnEstadoPedido;
     List<OrderDetails> listOrderDetails = new ArrayList<>();
     RecyclerView recyclerView;
     RequestQueue requestQueue;
@@ -61,7 +61,7 @@ public class DetallePedidoFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        asignarReferencias(view);
+
 
         Bundle datosRecuperados = getArguments();
         if (datosRecuperados == null) {
@@ -79,10 +79,21 @@ public class DetallePedidoFragment extends Fragment {
         String email = datosRecuperados.getString("email");
         String fechaPedido = datosRecuperados.getString("fechaPedido");
         String horaEntrega = datosRecuperados.getString("horaEntrega");
+        String tipoConsulta = datosRecuperados.getString("tipoCosulta");
 
         Double subtotal = datosRecuperados.getDouble("subtotal");
         Double igv = datosRecuperados.getDouble("igv");
         Double total = datosRecuperados.getDouble("total");
+
+        //Para enviar al fragment motorizado
+        idPedido = idOrder;
+        numPed = numPedido;
+        datCliente = dni +" - " + cliente;
+        datDireccion = direccion;
+        datTelefono =  telefono;
+        datTipoCosnulta = tipoConsulta;
+
+        asignarReferencias(view);
 
         txtnumPedido.setText(numPedido);
         txtdniCliente.setText(dni);
@@ -98,12 +109,6 @@ public class DetallePedidoFragment extends Fragment {
         txtigv.setText("S/ " + igv);
         txttotal.setText("S/ " + total);
 
-        //Para enviar al fragment motorizado
-        idPedido = idOrder;
-        numPed = numPedido;
-        datCliente = dni +" - " + cliente;
-        datDireccion = direccion;
-        datTelefono =  telefono;
 
         //Log.d("IDORDER=>>>",idPedido);
 
@@ -171,27 +176,43 @@ public class DetallePedidoFragment extends Fragment {
         txtigv = view.findViewById(R.id.txtIgv);
         txttotal = view.findViewById(R.id.txtTotal);
 
-        btnEntregarPedido = view.findViewById(R.id.btnEntregarPedido);
-        btnEntregarPedido.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(getContext(),"Boton clickkkk",Toast.LENGTH_SHORT).show();
 
-                MainActivity activity = (MainActivity) view.getContext();
-                Fragment newFragment = new MotorizadoFragment();
-                Bundle envData = new Bundle();
-                envData.putString("idPedido", idPedido);
-                envData.putString("numPedido", numPed);
-                envData.putString("datCliente",datCliente);
-                envData.putString("datDireccion",datDireccion);
-                envData.putString("datTelefono",datTelefono);
-                newFragment.setArguments(envData);
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,newFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        btnEntregarPedido = view.findViewById(R.id.btnEntregarPedido);
+        btnEstadoPedido = view.findViewById(R.id.btnEstadoPedido);
+
+
+        if(datTipoCosnulta.equals("ENTREGADOS")){
+
+            btnEntregarPedido.setVisibility(View.GONE);
+            btnEstadoPedido.setVisibility(View.GONE);
+
+        }else{
+            btnEntregarPedido.setVisibility(View.VISIBLE);
+            btnEstadoPedido.setVisibility(View.VISIBLE);
+
+            btnEntregarPedido.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Toast.makeText(getContext(),"Boton clickkkk",Toast.LENGTH_SHORT).show();
+
+                    MainActivity activity = (MainActivity) view.getContext();
+                    Fragment newFragment = new MotorizadoFragment();
+                    Bundle envData = new Bundle();
+                    envData.putString("idPedido", idPedido);
+                    envData.putString("numPedido", numPed);
+                    envData.putString("datCliente",datCliente);
+                    envData.putString("datDireccion",datDireccion);
+                    envData.putString("datTelefono",datTelefono);
+                    newFragment.setArguments(envData);
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment_activity_main,newFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
+        }
+
+
     }
 }

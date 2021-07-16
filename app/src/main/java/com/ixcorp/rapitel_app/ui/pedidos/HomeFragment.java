@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment {
                                 pedido.setTelefono(cust.getString("phone"));
                                 pedido.setEmail(cust.getString("email"));
                                 pedido.setDireccion(cust.getString("address"));
+                                pedido.setTipoConsulta("PENDIENTES");
 
                                 listaPedidos.add(pedido);
                             }
