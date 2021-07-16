@@ -1,8 +1,6 @@
 package com.ixcorp.rapitel_app.ui.rutaMapa;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -38,6 +36,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.ixcorp.rapitel_app.MainActivity;
 import com.ixcorp.rapitel_app.R;
+import com.ixcorp.rapitel_app.ui.subirEvidencias.SubirEvidenciasFragment;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ import java.util.List;
 public class RutaMapaFragment extends Fragment {
 
     TextView txtDireccion,txtCliente,txtTelefono;
-    String idPedido,dCliente,dDireccion,dTelefono,idVehiculo;
+    String idPedido,numPedido,dCliente,dDireccion,dTelefono,idVehiculo;
     Button btnMapEntregarPedido;
     ImageButton btnLlamarCliente;
 
@@ -73,6 +72,7 @@ public class RutaMapaFragment extends Fragment {
         }
 
         idPedido = datosRecuperados.getString("idPedido");
+        numPedido = datosRecuperados.getString("numPedido");
         dCliente = datosRecuperados.getString("dCliente");
         dDireccion = datosRecuperados.getString("dDireccion");
         dTelefono = datosRecuperados.getString("dTelefono");
@@ -83,7 +83,7 @@ public class RutaMapaFragment extends Fragment {
     }
 
     private void asignarReferencias(View view) {
-        txtDireccion = view.findViewById(R.id.txtMapDireccionCliente);
+        txtDireccion = view.findViewById(R.id.txtNombDniEvidencias);
         txtCliente = view.findViewById(R.id.txtMapCliente);
         txtTelefono = view.findViewById(R.id.txtMapTelefonoCliente);
 
@@ -101,6 +101,26 @@ public class RutaMapaFragment extends Fragment {
                     String dial = "tel:" + dTelefono;
                     startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
                 }
+            }
+        });
+
+        btnMapEntregarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Entregar pedido", Toast.LENGTH_SHORT).show();
+
+                MainActivity activity = (MainActivity) view.getContext();
+                Fragment newFragment = new SubirEvidenciasFragment();
+                Bundle envData = new Bundle();
+                envData.putString("idPedido", idPedido);
+                envData.putString("numPedido", numPedido);
+                envData.putString("idVehiculo", idVehiculo);
+                newFragment.setArguments(envData);
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main,newFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

@@ -90,8 +90,10 @@ public class DetallePedidoFragment extends Fragment {
         txttelefono.setText(telefono);
         txtdireccion.setText(direccion);
         txtemail.setText(email);
-        txtfechaEntrega.setText(fechaPedido.substring(0,10));
-        txthoraEntrega.setText(horaEntrega.substring(11));
+//        txtfechaEntrega.setText(fechaPedido.substring(0,10));
+//        txthoraEntrega.setText(horaEntrega.substring(11));
+        txtfechaEntrega.setText(fechaPedido);
+        txthoraEntrega.setText("3:30 pm");
         txtsubtotal.setText("S/ " + subtotal);
         txtigv.setText("S/ " + igv);
         txttotal.setText("S/ " + total);
@@ -156,7 +158,7 @@ public class DetallePedidoFragment extends Fragment {
 
 
     private void asignarReferencias(View view) {
-        txtnumPedido = view.findViewById(R.id.txtNumPedidoMot);
+        txtnumPedido = view.findViewById(R.id.txtNumPedidoEvidencias);
         txtdniCliente = view.findViewById(R.id.txtDniCliente);
         txtnombreCliente = view.findViewById(R.id.txtNombresCliente);
         txttelefono = view.findViewById(R.id.txtTelefono);

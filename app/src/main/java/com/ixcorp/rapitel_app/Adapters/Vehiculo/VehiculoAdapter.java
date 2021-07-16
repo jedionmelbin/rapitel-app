@@ -52,7 +52,8 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.MyView
                 Bundle envData = new Bundle();
                 envData.putString("idVehiculo", listaVehiculos.get(position).getVehicleId()+"");
 
-                envData.putString("idPedido", listaVehiculos.get(position).getNumPedido()+"");
+                envData.putString("idPedido", listaVehiculos.get(position).getIdPedido()+"");
+                envData.putString("numPedido", listaVehiculos.get(position).getNumPedido()+"");
                 envData.putString("dCliente", listaVehiculos.get(position).getsCliente()+"");
                 envData.putString("dDireccion", listaVehiculos.get(position).getsDireccion()+"");
                 envData.putString("dTelefono", listaVehiculos.get(position).getsTelefono()+"");
@@ -77,7 +78,7 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.MyView
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtVehiulo = itemView.findViewById(R.id.txtMapDireccionCliente);
+            txtVehiulo = itemView.findViewById(R.id.txtNombDniEvidencias);
             txtPlaca = itemView.findViewById(R.id.txtMapCliente);
             txtColor = itemView.findViewById(R.id.txtMapTelefonoCliente);
         }

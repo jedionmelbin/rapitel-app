@@ -83,8 +83,6 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.MyViewHold
                         .replace(R.id.nav_host_fragment_activity_main,newFragment)
                         .addToBackStack(null)
                         .commit();
-
-
             }
         });
     }

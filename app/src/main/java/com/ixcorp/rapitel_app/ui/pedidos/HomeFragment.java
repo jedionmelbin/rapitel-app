@@ -119,8 +119,8 @@ public class HomeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError e) {
-                        //Log.i("Error => ", e.getMessage());
-                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d("Error =>",e.getMessage());
+                        Toast.makeText(getContext(), "No se pudo conectar al servidor", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

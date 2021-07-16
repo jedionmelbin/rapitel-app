@@ -6,6 +6,7 @@ public class Vehicle {
     private String plate;
     private String color;
 
+    private String idPedido;
     private String numPedido;
     private String sCliente;
     private String sDireccion;
@@ -41,6 +42,14 @@ public class Vehicle {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(String idPedido) {
+        this.idPedido = idPedido;
     }
 
     public String getNumPedido() {

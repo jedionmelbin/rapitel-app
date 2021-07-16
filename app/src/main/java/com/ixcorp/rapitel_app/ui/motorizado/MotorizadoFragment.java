@@ -20,9 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.ixcorp.rapitel_app.Adapters.DetallePedido.DetallePedidoAdapter;
 import com.ixcorp.rapitel_app.Adapters.Vehiculo.VehiculoAdapter;
-import com.ixcorp.rapitel_app.Model.OrderDetails;
 import com.ixcorp.rapitel_app.Model.Vehicle;
 import com.ixcorp.rapitel_app.R;
 import com.ixcorp.rapitel_app.Utils.Api;
@@ -39,7 +37,7 @@ public class MotorizadoFragment extends Fragment {
 
     //TextView txtVehiulo,txtPlaca,txtColor;
     TextView txtNumPedidoMot;
-    String idPedido,dCliente,dDireccion,dTelefono;
+    String idPedido,numPedido,dCliente,dDireccion,dTelefono;
     List<Vehicle> listaVehiculo = new ArrayList<>();
     RecyclerView recyclerView;
     RequestQueue requestQueue;
@@ -56,7 +54,7 @@ public class MotorizadoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         requestQueue = Volley.newRequestQueue(getContext());
 
-        txtNumPedidoMot = view.findViewById(R.id.txtNumPedidoMot);
+        txtNumPedidoMot = view.findViewById(R.id.txtNumPedidoEvidencias);
         recyclerView = view.findViewById(R.id.listaMotorizados);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -76,6 +74,7 @@ public class MotorizadoFragment extends Fragment {
         String datTelefono = datosRecuperados.getString("datTelefono");
 
         idPedido = idOrder;
+        numPedido = numPed;
         dCliente = datCliente;
         dDireccion = datDireccion;
         dTelefono = datTelefono;
@@ -102,7 +101,8 @@ public class MotorizadoFragment extends Fragment {
                                 vehicle.setNameVehiculo(veh.getString("name"));
                                 vehicle.setPlate(veh.getString("plate"));
                                 vehicle.setColor(veh.getString("color"));
-                                vehicle.setNumPedido(idPedido);
+                                vehicle.setIdPedido(idPedido);
+                                vehicle.setNumPedido(numPedido);
                                 vehicle.setsCliente(dCliente);
                                 vehicle.setsDireccion(dDireccion);
                                 vehicle.setsTelefono(dTelefono);

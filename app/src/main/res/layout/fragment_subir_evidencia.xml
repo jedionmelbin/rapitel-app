@@ -4,8 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    tools:context=".ui.subirEvidencias.subir_evidencia">
+    android:background="@color/white"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="5dp"
+    tools:context=".ui.subirEvidencias.SubirEvidenciasFragment">
 
     <ImageView
         android:id="@+id/iconPedido"
@@ -28,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/iconPedido" />
 
     <TextView
-        android:id="@+id/txtNumPedidoMot"
+        android:id="@+id/txtNumPedidoEvidencias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -75,9 +77,9 @@
 
                 <ImageView
                     android:id="@+id/imgFotoDni"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icon_foto_dni" />
@@ -90,13 +92,13 @@
                     android:layout_marginTop="10dp"
                     android:text="Subir foto del dni"
                     android:textColor="@color/colAzul"
-                    android:textSize="30px"
+                    android:textSize="35px"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imgFotoDni"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txtMapDireccionCliente"
+                    android:id="@+id/txtNombDniEvidencias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -135,9 +137,9 @@
 
                 <ImageView
                     android:id="@+id/imgFotoEntrega"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icon_foto_entrega" />
@@ -148,15 +150,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:text="Subir foto del dni"
+                    android:text="Subir foto de la entrega"
                     android:textColor="@color/colAzul"
-                    android:textSize="30px"
+                    android:textSize="35px"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imgFotoEntrega"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txtFotoEntrega"
+                    android:id="@+id/txtNombEntregaEvidencias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -182,7 +184,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnRegistrarEntrega"
+        android:id="@+id/btnRegistrarEntregaPedido"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"

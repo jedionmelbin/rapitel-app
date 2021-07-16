@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/iconPedido" />
 
     <TextView
-        android:id="@+id/txtNumPedidoMot"
+        android:id="@+id/txtNumPedidoEvidencias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
